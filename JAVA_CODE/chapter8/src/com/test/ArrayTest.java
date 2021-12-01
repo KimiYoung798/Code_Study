@@ -1,4 +1,4 @@
-import java.util.Scanner;
+package com.test;
 
 public class ArrayTest {
     public static void main(String[] args) {
