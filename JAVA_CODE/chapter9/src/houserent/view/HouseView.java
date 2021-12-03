@@ -18,8 +18,21 @@ public class HouseView {
     private HouseService u = new HouseService(0);
 
 
-    //添加房屋
+    //添加房屋，接收输入，创建House对象，调用add方法
     public void addHouse() {
+        System.out.println("------------添加房屋-------------");
+        System.out.println("姓名：");
+        String name = Utility.readString(8);
+        System.out.println("电话：");
+        String phone= Utility.readString(12);
+        System.out.println("地址：");
+        String address = Utility.readString(20);
+        System.out.println("月租：");
+        int rent = Utility.readInt();
+        System.out.println("状态：");
+        String state = Utility.readString(3);
+        //创建House对象，注意id是系统分配，自增长
+        u.add(new House(0,name,phone,address,rent,state));
 
     }
     //显示房屋列表
@@ -50,7 +63,7 @@ public class HouseView {
             key = Utility.readChar();
             switch (key) {
                 case '1' :
-                    System.out.println("新增");
+                    addHouse();
                     break;
                 case '2' :
                     System.out.println("查找");

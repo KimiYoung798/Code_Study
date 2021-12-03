@@ -9,8 +9,6 @@ public class House {
     private double rent;
     private String state;
     //构造器，setter，getter
-
-
     public House(int id, String name, String phone, String address, double rent, String state) {
         this.id = id;
         this.name = name;
@@ -73,10 +71,10 @@ public class House {
     @Override
     public String toString() {
         return id +
-               "\n" + name +
-                "\n" + phone +
-                "\n" + address +
-                "\n" + rent +
-                "\n" + state ;
+               "\t\t" + name +
+                "\t\t" + phone +
+                "\t\t" + address +
+                "\t\t" + rent +
+                "\t\t" + state ;
     }
 }
