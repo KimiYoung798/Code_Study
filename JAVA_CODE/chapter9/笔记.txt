@@ -11,10 +11,13 @@
             1.编写mainMenu，显示菜单
             2.编写list House()
             3.编写addHouse()
+            4.编写delHouse界面，接受删除条目的id
         //业务层
         HouseService -- 响应house view调用，完成对房屋信息的各种操作CRUD。定义House[]，保存House对象
             1.编写一个list方法返回所有房屋信息
             2.add(House newHouse),把新的house对象加入到数组中，返回boolean判断是否成功
+            3.编写del实现真正的删除，返回Boolean
+
         //domain/model模型层
         House -- 一个house对象就是一个房屋信息
         //程序入口
