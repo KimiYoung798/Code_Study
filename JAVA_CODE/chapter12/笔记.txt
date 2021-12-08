@@ -1,0 +1,76 @@
+异常 - exception
+    异常的概念
+    异常体系图！！
+    常见的异常
+    异常处理概念
+    异常处理分类
+    自定义异常
+    throw和throws的对比
+
+异常的概念
+    java语言中，将程序执行中发生的不正常情况称为“异常”。(开发过程中的语法错误和逻辑错误不是异常)
+    执行过程中生的异常事件可分为两大类
+        1) Error(错误)：Java虚拟机无法解决的严重问题。如：JVM系统内部错误、资源耗尽等严重情况。比如：StackOverflowError[栈溢出]和OOM(out of memory)，Error 是严重错误，程序会崩溃。
+        2) Exception: 其它因编程错误或偶然的外在因素导致的一般性问题，可以使用针对性的代码进行处理。例如空指针访问，试图读取不存在的文件，网络连接中断等等，
+            Exception 分为两大类：运行时异常[程序运行时，发生的异常]和编译时异常[编程时，编译器检查出的异常]。
+异常体系图！！
+                                                   | - NullPointerException
+                                                   | - ArithmeticException
+                                                   | - ArrayIndexOutOfBoundsException
+                | - Exception - RuntimeException - | - ClassCastException
+                |                                  | - NumberFormatException
+                |
+    Throwable-  |
+                |        | - OutOfMemoryError
+                | -Error |
+                         | - StackOverflowError
+
+
+    小结：
+        1.运行时异常，编译器不要求强制处理，一般是指编程时的逻辑措施，是程序员应该避免其出现的异常
+        2.对于运行时异常可以不做处理，因为这类异常很普遍，若全处理可能对程序的可读性和运行效率产生影响
+        3.编译时异常时编译器要求必须处置的异常
+常见的异常
+    1.NullPointerException
+    2.ArithmeticException
+    3.ArrayIndexOutOfBoundsException
+    4.ClassCastException
+    5.NumberFormatException
+异常处理概念
+    处理方式：
+        1.try-catch-finally  程序员捕获异常，自行处理
+            try {
+                可能有问题的代码块
+            }catch(Exception e) {
+                当异常发生时，系统将异常封装成Exception对象e传递至catch
+                得到异常处理对象后，程序员可以自行处理，如果没有异常，catch块不执行
+
+            }finally {
+                不论代码块是否有异常，始终要执行finally
+            }
+        2.throws  将发生异常抛出，交给方法调用者处理，最顶级的处理就是JVM
+
+异常处理分类
+    try - catch
+        如果没有出现异常，则执行try块中所有的语句，不执行catch块中语句，如果有finally 还需要执行finally里面的语句
+        如果出现异常，则try块剩下的语句不再执行，将执行catch块中的语句，如果有finally 最后还需要执行finally中语句
+        try-catch 可以有多个catch语句，捕获不同异常，要求父类异常在后，子类异常在前，如果发生异常只会匹配一个catch
+        允许try-finally，相当于没有捕获异常，应用场景就是执行一段代码，不管是否发生异常，都必须执行某个业务逻辑
+    throws异常处理
+        如果一个方法可能会生成某种异常，但是并不能确定如何处理这种异常，则方法应显示声明抛出异常，表明该方法对异常不做处理，由调用者负责处理
+        在方法声明中用throws语句可以声明抛出异常的列表，throws后面的异常类型可以是方法中产生的异常类型也可以是其父类
+        细节：
+            对于编译异常程序必须处理，
+            对于运行异常，程序中若没处理，默认就是throws方式处理
+            子类重写父类方法是，对抛出异常规定：子类重写的方法，所抛出的异常类型要么和父类抛出的一致，要么为父类抛出异常的类型的子类型
+            在throws过程中，如果有try-catch，就相当于异常处理，就不必throws
+
+自定义异常
+    当程序出现了一些错误，但没有在Throwable子类中描述处理，这时候可以自己设计异常类
+    自定义步骤：
+        自定义类通常继承Exception或RuntimeException
+        如果继承Exception，属于编译异常
+        如果继承RuntimeException属于运行异常
+throw和throws的对比
+    Throws 异常处理的一种方式 用在方法声明处，后面跟异常类型
+    Throw 手动生成异常对象关键字，用在方法体中，后面跟的是异常对象
