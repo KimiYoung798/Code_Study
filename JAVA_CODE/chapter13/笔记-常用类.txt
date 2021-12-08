@@ -1,0 +1,35 @@
+常用类
+    包装类
+    String类
+    StringBuffer和StringBuilder类
+    Math类
+    Date日期类和Calendar日立类以及新的日期
+    System类
+    Arrays类
+    BigInteger类和BigDecimal类
+
+包装类wrapper
+    针对八种基本定义相应的引用类型-包装类
+    有了类的特征就可以调用类中的方法
+    boolean - Boolean
+    char - Character
+    byte - Byte - Number
+    short - Short - Number-
+    int - Integer - Number
+    long - Long - Number
+    float - Float - Number
+    double - Double - Number
+    包装类和基本数据类型的转换
+        jdk5之前的手动装箱和拆箱的放还是，装箱：基本数据类型->包装类型
+        jdk5之后，自动装箱和拆箱
+        自动装箱底层调用的是valueOf方法，比如Integer.valueOf()
+    包装类与String转换
+
+String类
+
+StringBuffer和StringBuilder类
+Math类
+Date日期类和Calendar日立类以及新的日期
+System类
+Arrays类
+BigInteger类和BigDecimal类
