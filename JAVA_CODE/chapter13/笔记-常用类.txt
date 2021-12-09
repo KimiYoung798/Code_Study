@@ -26,8 +26,112 @@
     包装类与String转换
 
 String类
+    介绍
+        1.String对象用于保存字符串，也就是一组字符的序列
+        2.字符串常量对象是引用号括起的字符序列
+        3.字符串的字符使用的Unicode字符拜尼马，一个字符占两个字节
+        4.String常用构造器
+            String s1 = new String();
+            String s2 = new String(String original);
+            String s3 = new String(char[] a);
+            String s4 = new String(char[] a, int startIndex, int count);
+            String s5 = new String(byte[] b);
+        5.实现Serializable，说明String可以串行化，数据可以在网络传输
+        6.实现Comparable，说明String对象可以比较
+        7.String是个final类，不能被继承
+        8.String有属性private final char value[];用于存放字符串内容
+        9.value是一个final类型，不可以修改-指的是地址
+    两种创建String对象的区别
+        方式一：直接赋值 String s = "hello";
+            先从常量池查看是否有‘hello’数据空间，如果有直接指向，如果没有，则重新创建然后指向。s最终指向的常量池的空间地址
 
+        方式二：调用构造器 String s = new String("hello");
+            先从堆中创建空间，里面维护了value的属性，指向常量池的字符串空间。如果没有，重新创建，如果有，直接通过value指向，最终指向的是堆中的地址
+            intern(),如果池中已经包含一个等于此String的字符串，则返回池中字符串，否则将String对象添加到池中，并返回String对象的引用
+            最终返回的是常量池地址
+    字符串特性：
+        * 小结
+            * 底层是StringBuilder sb = new StringBuilder();
+            * sb.append(a);
+            * sb.append(b);
+            * sb是在堆中的，并且append是在原来的字符串基础上追加的
+            * 重要规则
+            * String c = "a"+"b";常量相加，看的是池
+            * String c = a + b;变量相加，是在堆中
+            * */
+    String常用方法
+        String类是保存字符串常量的，每次更新都需要重新开辟空间，效率较低，因此java设计者还提供了StringBuilder和StringBuffer来增强String功能
+        equals              //区分大小写判断是否相等
+        equalsIgnoreCase    //忽略大小写判断
+        length              //获取字符个数，字符串长度
+        indexOf             //获取字符在字符串中第一次出现的索引，索引从0开始，找不到返回-1，左闭右开
+        lastIndexOf         //获取字符在字符串中最后一次出现的索引，索引从0开始，找不到返回-1，左闭右开
+        substring           //截取指定范围的字串
+        trim                //去前后空格
+        charAt              //获取某处索引的字符，注意不能使用str[index]这种
+
+        toUpperCase         //全大写
+        toLowerCase         //全小写
+        concat              //拼接
+        replace             //替换，(替换对象，替换内容)
+        split               //分割split("")""中内容为标准，进行分割，返回一个数组
+        compareTo           //比较字符串大小，前者大，返回正数，后者大，返回负数，如果完全相等返回0
+        toCharArray         //字符串转成字符数组
+        format              //格式化字符串，占位符，C语言类似
 StringBuffer和StringBuilder类
+    StringBuffer
+        代表可变字符序列，可以堆字符串内容进行增删，许多方法与String类似，但StringBuffer是可变长度
+        StringBuffer是一个容器
+        1.StringBuffer直接父类是AbstractStringBuilder
+        * 2.StringBuffer实现了Serializable，可以串行化
+        * 3.在父类中，AbstractStringBuilder 有属性 char[] value，不是final，可变，放在堆中
+        * 4.StringBuffer是个final类
+
+        与String对比
+            String保存的是字符常量，里面值不能更改，每次更改实际就是更改地址，效率低
+            SB保存的是字串变量，里面值可以更改，不用每次更新地址，效率更高-空间地址不够，才会更新地址
+        SB构造器
+            StringBuffer()                  // 构造一个不字符的字符缓冲区，初始容量16个字符
+            StringBuffer(CharSequence seq)  // 构造一个字符缓冲区，包含与指定CharSequence相同的字符
+            StringBuffer(int capacity)      // 构造不带字符，但是有指定初始容量的字符缓冲区
+            StringBuffer(String str)        // 构造一个缓冲器，初始化定位指定字符串
+        String -> StringBuffer
+             String s = "hello";
+             //方式1
+             StringBuffer sb1 = new StringBuffer(s);
+             //方式2
+             StringBuffer sb2 = new StringBuffer();
+             sb2.append(s);
+        StringBuffer -> String
+            //方式1
+            String s1 = sb1.toString();
+            //方式2
+            String s2 = new String(sb1);
+        StringBuffer常用方法
+            append
+            delete(start,end)
+            replace(start,end,str)
+            indexOf
+            insert
+            length
+
+    StringBuilder
+        基本介绍：
+            1.一个可变的字符序列。提供一个与StringBuffer兼容的API，但不保证同步(不是线程安全)，该类被设计作用StringBuffer的一个简易替换，用在字符串缓冲区被单个线程使用的时候
+                如果可能建议优先采用该类，一位内在大多数现实中，要比Buffer要块
+            2.在StringBuilder上的主要操作是append和insert，可以重载这些方法，以介绍任意类型。
+    三者区别：
+        1.StringBuilder和StringBuffer非常类似，均代表可变的字符序列，且方法一致
+        2.String为不可变字符，效率低，但复用率高
+        3.StringBuffer可变序列，效率较高（增删）、线程安全
+        4.StringBuilder可变序列，效率最高，线程不安全
+        5.String使用注意说明：
+            string s="a"; //创建了一个字符串
+            s += "b"; //实际上原来的"a"字符串对象已经丢弃了，现在又产生了一个字符串s+"b"（也就是"ab")。
+            如果多次执行这些改变串内容的操作，会导致大量副本字符串对象存留在内存中，降低效率。
+            如果这样的操作放到循环中，会极大影响程序的性能 => 结论：如果我们对String 做大量修改,不要使用String
+
+
 Math类
 Date日期类和Calendar日立类以及新的日期
 System类
