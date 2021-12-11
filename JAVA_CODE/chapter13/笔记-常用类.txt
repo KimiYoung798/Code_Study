@@ -142,9 +142,38 @@ Math类
     均为静态方法，直接使用
 
 Date日期类和Calendar日立类以及新的日期
-
+    第一代：
+        Date，精确到毫秒
+        SimpleDateFormat，格式和解析日期的类，它允许进行格式化解析和规范化
+    第二代：
+        Calendar
+        是一个抽象类，它为特定瞬间与一组诸如YEAR、MONTH等日立字段之间的转换提供了一些方法，并未操作日立字段提供了一些方法
+    第三代：
+        LocalDate，
+        LocalTime，
+        LocalDateTime
 System类
+    1.exit。
+    2.arraycopy，比较适合底层调用
+    3.currentTimeMillis，返回当前时间距离1970.1.1的毫秒数
+    4.gc，；垃圾回收机制
 
 Arrays类
+    Arrays里面也包含了一系列静态方法，用于管理或操作数组
+    1.toString，返回数组的字符串形式
+    2.sort，排序
+    3.binarySearch。通过二分法进行查找，要求必须排序好
+    4.copyOf，复制数组元素
+    5.fill，数组元素的填充
+    6.equals，比较两个元素内容是否一致
+    7.asList，将一组数组转成list
 
 BigInteger类和BigDecimal类
+    BigInteger保存较大的整型
+        1.add
+        2.subtract
+        3.multiply
+        4.divide
+    BigDecimal保存精度更高的浮点数
+        除法结果无限不循环等，确认个精度即可不报错，BigDecimal.ROUND_CEILING -- 保留分子精度
+
