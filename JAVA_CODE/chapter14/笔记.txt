@@ -135,7 +135,21 @@ Collection接口的子接口：Set实现类：HashSet linkedHashSet
         只能使用迭代器和增强for，不能使用索引
 
     HashSet
+        1.HashSet实现了Set接口
+        2.底层其实是HashMap
+        3.可以存放null 但只能有一个
+        4.HashSet不保证元素有序，取决于Hash后，再确定索引的结果
+        5.不能有重复元素 -- 真正含义
 
+        HashSet底层机制
+            底层是HashMap - HashMap底层是 数组+链表+红黑树
+            分析HashSet添加元素底层是如何实现
+                1.HashSet底层是HashMap
+                2.添加一个元素时，先得到Hash值 - 会转成 索引值
+                3.找到存储数据表table，看这个索引位置是否已经放的有元素
+                4.如果没有，直接加入
+                5.如果有，调用equals比较，如果相同，放弃添加，如果不同，则添加到最后
+                6.java8中，如果一个链表的元素个数到达TREEIFY_THRESHOLD默认是8，并且table的大小>=MIN_TREEIFY_CAPACITY默认64，就会进行树化
 
 
 Map接口 特点方法 遍历方式
